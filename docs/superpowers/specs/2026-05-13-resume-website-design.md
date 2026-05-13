@@ -98,6 +98,8 @@ src/
 
 **The `Prompt` component is the design primitive.** Every page leads with one. On home: `$ whoami`, `$ cat ~/.bio`, `$ ls ~`. On `/about`: `$ cat ~/about.md`. On `/resume`: `$ cat ~/resume.txt`. This gives every page a consistent visual rhythm.
 
+The component MUST render with `class="prompt"` on its outermost element so the verification step in §9 can grep for a stable token across every built page.
+
 ## 6. Content model
 
 `src/content/config.ts` schema for the `projects` collection:
@@ -231,9 +233,9 @@ dist/
    - `projects/placeholder/index.html`
    - `contact/index.html`
    - `404.html`
-4. Every output page references `JetBrains Mono` (via `@font-face` in the bundled CSS or a `<link>` tag).
-5. `global.css` (or its built form in `dist/_astro/*.css`) defines every design token: `--bg`, `--fg`, `--fg-muted`, `--accent`, `--border`, `--prompt`.
-6. Every page renders the `Prompt` component (grep `dist/**/*.html` for the prompt's CSS class — e.g., `class="prompt"` or `class="prompt-line"`).
+4. Astro bundles all CSS into `dist/_astro/*.css`. That bundle must reference `JetBrains Mono` (the `@font-face` declaration lives there, not in each HTML page). Verification greps the bundled CSS.
+5. The bundled CSS in `dist/_astro/*.css` defines every design token: `--bg`, `--fg`, `--fg-muted`, `--accent`, `--border`, `--prompt`.
+6. Every page renders the `Prompt` component. Verification greps `dist/**/*.html` for the literal string `class="prompt"`.
 7. The placeholder marker convention is in use: each of `about/index.html`, `resume/index.html`, `projects/placeholder/index.html`, `contact/index.html` contains at least one `<<` token.
 8. No `<script>` tags appear in any built page (zero-JS rule).
 9. `dist/_astro/*.css` parses (cheap brace-balance check).
