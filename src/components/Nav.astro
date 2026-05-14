@@ -1,0 +1,60 @@
+---
+// Nav — used in the Base layout. Two variants:
+//   variant="ls"      — home page: "ls ~" style listing
+//   variant="inline"  — inner pages: compact " ~ · about · resume · ... "
+interface Props {
+  variant?: 'ls' | 'inline';
+  current?: string;
+}
+const { variant = 'inline', current = '' } = Astro.props;
+
+const links = [
+  { href: '/',         label: '~',          slug: 'home' },
+  { href: '/about',    label: 'about',      slug: 'about' },
+  { href: '/resume',   label: 'resume',     slug: 'resume' },
+  { href: '/projects', label: 'projects',   slug: 'projects' },
+  { href: '/contact',  label: 'contact',    slug: 'contact' },
+];
+---
+{variant === 'ls' ? (
+  <nav class="nav-ls">
+    <a href="/about"    class="entry">about/</a>
+    <a href="/projects" class="entry">projects/</a>
+    <a href="/resume"   class="entry">resume.md</a>
+    <a href="/contact"  class="entry">contact.txt</a>
+  </nav>
+) : (
+  <nav class="nav-inline">
+    {links.map((link, idx) => (
+      <>
+        <a href={link.href} class={current === link.slug ? 'active' : ''}>{link.label}</a>
+        {idx < links.length - 1 && <span class="sep"> · </span>}
+      </>
+    ))}
+  </nav>
+)}
+
+<style>
+  .nav-ls {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    margin: 0 0 var(--space-4);
+  }
+  .nav-ls .entry { color: var(--accent); }
+  .nav-inline {
+    margin: 0 0 var(--space-6);
+    color: var(--fg-muted);
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+  }
+  .nav-inline a {
+    color: var(--fg-muted);
+    text-decoration: none;
+  }
+  .nav-inline a.active {
+    color: var(--fg);
+  }
+  .nav-inline a:hover { color: var(--fg); }
+  .nav-inline .sep { color: var(--border); }
+</style>
