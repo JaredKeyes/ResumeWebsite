@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Prompt from '../components/Prompt.astro';
+---
+<Base title="about — <<YOUR_NAME>>" current="about">
+
+  <Prompt cmd="cat ~/about.md">
+    <h1>About</h1>
+    <p>{'<<PARAGRAPH_ABOUT_YOURSELF_AND_BACKGROUND>>'}</p>
+    <p>{'<<PARAGRAPH_ABOUT_WHAT_DRIVES_YOU_PROFESSIONALLY>>'}</p>
+    <p class="muted">{'<<OPTIONAL_PERSONAL_TIDBIT_HOBBY_LOCATION>>'}</p>
+  </Prompt>
+
+  <div class="divider"></div>
+
+  <Prompt cmd="cat ~/.links">
+    <a href="<<GITHUB_URL>>">github</a>{'   '}
+    <a href="<<LINKEDIN_URL>>">linkedin</a>{'   '}
+    <a href="mailto:<<EMAIL>>">email</a>
+  </Prompt>
+
+</Base>
