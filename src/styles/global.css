@@ -29,7 +29,12 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  /* Subtle dot grid — fixed so it doesn't scroll, blends into the
+     terminal aesthetic without competing with text. */
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-attachment: fixed;
   color: var(--fg);
   font-family: var(--font-mono);
   font-size: 16px;
