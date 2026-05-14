@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Prompt from '../components/Prompt.astro';
+---
+<Base title="<<YOUR_NAME>>" current="home" navVariant="ls">
+
+  <Prompt cmd="whoami">
+    {'<<YOUR_NAME>>'}
+  </Prompt>
+
+  <Prompt cmd="cat ~/.bio">
+    {'<<ONE_LINE_TAGLINE>>'}<br />
+    {'<<TWO_LINE_INTRO_PARAGRAPH>>'}
+    <span class="muted">Currently: {'<<CURRENT_FOCUS>>'}.</span>
+  </Prompt>
+
+  <Prompt cmd="ls ~">
+    <a href="/about">about/</a>
+    {'   '}
+    <a href="/projects">projects/</a>
+    {'   '}
+    <a href="/resume">resume.md</a>
+    {'   '}
+    <a href="/contact">contact.txt</a>
+  </Prompt>
+
+  <div class="caret-line">
+    <span style="color: var(--prompt)">$</span> <span class="caret"></span>
+  </div>
+
+</Base>
+
+<style>
+  .caret-line {
+    margin-top: var(--space-5);
+  }
+</style>

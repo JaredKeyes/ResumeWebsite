@@ -71,12 +71,16 @@ shopt -u globstar nullglob
 [[ $FAILED -eq 0 ]] && ok "every page contains class=\"prompt\""
 
 # 7. Placeholder marker convention is in use.
+# Astro HTML-escapes "<" and ">" in interpolated text, so a literal
+# "<<X>>" in an .astro template renders as "&lt;&lt;X&gt;&gt;" in the
+# built HTML. Accept either the entity form or the literal form so the
+# check is robust to set:html-style raw emission too.
 for page in \
     "dist/about/index.html" \
     "dist/resume/index.html" \
     "dist/projects/placeholder/index.html" \
     "dist/contact/index.html"; do
-    if [[ -f "$page" ]] && grep -q '<<' "$page"; then
+    if [[ -f "$page" ]] && grep -qE '<<|&lt;&lt;' "$page"; then
         ok "placeholder marker present: $page"
     else
         fail "placeholder marker missing: $page"
