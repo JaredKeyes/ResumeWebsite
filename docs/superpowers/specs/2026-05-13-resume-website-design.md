@@ -86,10 +86,10 @@ src/
 │   │   ├── index.astro     — /projects (reads collection, renders cards)
 │   │   └── [slug].astro    — /projects/<slug> (dynamic from collection)
 │   └── 404.astro
+├── content.config.ts       — Zod schema for the collection (Astro v5 location)
 ├── content/
-│   ├── projects/
-│   │   └── placeholder.md  — Seed project; frontmatter + body
-│   └── config.ts           — Zod schema for the collection
+│   └── projects/
+│       └── placeholder.md  — Seed project; frontmatter + body
 ├── styles/
 │   └── global.css          — CSS custom properties + base resets
 └── assets/
@@ -102,22 +102,24 @@ The component MUST render with `class="prompt"` on its outermost element so the 
 
 ## 6. Content model
 
-`src/content/config.ts` schema for the `projects` collection:
+`src/content.config.ts` schema for the `projects` collection (Astro v5 syntax — the v4 shorthand `type: 'content'` is replaced by an explicit `loader`):
 
 ```ts
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { z } from 'astro/zod';
+import { glob } from 'astro/loaders';
 
 const projects = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
   schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    stack: z.array(z.string()),
-    status: z.enum(['shipped', 'wip', 'archived']),
-    started: z.date(),
-    finished: z.date().optional(),
+    title:      z.string(),
+    summary:    z.string(),
+    stack:      z.array(z.string()),
+    status:     z.enum(['shipped', 'wip', 'archived']),
+    started:    z.coerce.date(),
+    finished:   z.coerce.date().optional(),
     github_url: z.string().url().optional(),
-    cover_alt: z.string().optional(),
+    cover_alt:  z.string().optional(),
   }),
 });
 
