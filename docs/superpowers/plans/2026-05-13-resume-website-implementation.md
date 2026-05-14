@@ -49,14 +49,14 @@ src/pages/404.astro               (new, Task 19)
 
 Avoid `npm create astro` — its interactive prompts would hang a non-TTY Ralph iteration. Build the project files by hand instead; they are short.
 
-- [ ] **Step 1: Pin Node version**
+- [x] **Step 1: Pin Node version**
 
 ```bash
 cd ~/projects/resume-website
 echo "20" > .nvmrc
 ```
 
-- [ ] **Step 2: Write `package.json`**
+- [x] **Step 2: Write `package.json`**
 
 ```json
 {
@@ -80,7 +80,7 @@ echo "20" > .nvmrc
 }
 ```
 
-- [ ] **Step 3: Write `astro.config.mjs`**
+- [x] **Step 3: Write `astro.config.mjs`**
 
 ```js
 // @ts-check
@@ -89,7 +89,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({});
 ```
 
-- [ ] **Step 4: Write `tsconfig.json`**
+- [x] **Step 4: Write `tsconfig.json`**
 
 ```json
 {
@@ -97,7 +97,7 @@ export default defineConfig({});
 }
 ```
 
-- [ ] **Step 5: Install dependencies**
+- [x] **Step 5: Install dependencies**
 
 ```bash
 npm install
@@ -105,7 +105,7 @@ npm install
 
 Expected: `npm install` exits 0; `node_modules/` and `package-lock.json` are created. The Astro CLI is now available via `npm run`.
 
-- [ ] **Step 6: Smoke-test the Astro toolchain**
+- [x] **Step 6: Smoke-test the Astro toolchain**
 
 ```bash
 npm run build
@@ -113,7 +113,7 @@ npm run build
 
 Expected: Astro reports `0 page(s) built` (no pages yet) and exits 0. If it exits non-zero, fix the error before continuing — Astro itself is mis-installed.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add .nvmrc package.json package-lock.json astro.config.mjs tsconfig.json
@@ -127,14 +127,14 @@ git commit -m "Scaffold Astro project, pin Node 20"
 **Files:**
 - Modify: `package.json` (Astro adds the dependency)
 
-- [ ] **Step 1: Install the variable font package**
+- [x] **Step 1: Install the variable font package**
 
 ```bash
 cd ~/projects/resume-website
 npm install @fontsource-variable/jetbrains-mono
 ```
 
-- [ ] **Step 2: Confirm it landed in node_modules**
+- [x] **Step 2: Confirm it landed in node_modules**
 
 ```bash
 ls node_modules/@fontsource-variable/jetbrains-mono/index.css
@@ -142,7 +142,7 @@ ls node_modules/@fontsource-variable/jetbrains-mono/index.css
 
 Expected: prints the path (file exists). `@fontsource-variable/jetbrains-mono` ships the variable-weight `.woff2` plus an `index.css` that declares the `@font-face` rule.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add package.json package-lock.json
@@ -156,13 +156,13 @@ git commit -m "Add JetBrains Mono variable font via @fontsource-variable"
 **Files:**
 - Create: `src/styles/global.css`
 
-- [ ] **Step 1: Create the stylesheet directory**
+- [x] **Step 1: Create the stylesheet directory**
 
 ```bash
 mkdir -p src/styles
 ```
 
-- [ ] **Step 2: Write `src/styles/global.css`**
+- [x] **Step 2: Write `src/styles/global.css`**
 
 ```css
 /* JetBrains Mono — bundled by Astro via @fontsource-variable.
@@ -255,7 +255,7 @@ h3 { font-size: 1rem; }
 @keyframes caret-blink { 50% { opacity: 0; } }
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/styles/global.css
@@ -269,13 +269,13 @@ git commit -m "Add design tokens and base styles in global.css"
 **Files:**
 - Create: `scripts/verify.sh`
 
-- [ ] **Step 1: Create the script directory**
+- [x] **Step 1: Create the script directory**
 
 ```bash
 mkdir -p scripts
 ```
 
-- [ ] **Step 2: Write `scripts/verify.sh`**
+- [x] **Step 2: Write `scripts/verify.sh`**
 
 ```bash
 #!/usr/bin/env bash
@@ -399,13 +399,13 @@ else
 fi
 ```
 
-- [ ] **Step 3: Make the script executable**
+- [x] **Step 3: Make the script executable**
 
 ```bash
 chmod +x scripts/verify.sh
 ```
 
-- [ ] **Step 4: Run it — confirm it fails (no pages yet)**
+- [x] **Step 4: Run it — confirm it fails (no pages yet)**
 
 ```bash
 ./scripts/verify.sh
@@ -413,7 +413,7 @@ chmod +x scripts/verify.sh
 
 Expected: many `✗` lines, final line `verify.sh: ONE OR MORE CHECKS FAILED`, exit 1. This is correct at this point. The remaining tasks will turn the checks green one by one.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add scripts/verify.sh
@@ -427,13 +427,13 @@ git commit -m "Add verify.sh — the success-criterion gate"
 **Files:**
 - Create: `src/components/Prompt.astro`
 
-- [ ] **Step 1: Create the components directory**
+- [x] **Step 1: Create the components directory**
 
 ```bash
 mkdir -p src/components
 ```
 
-- [ ] **Step 2: Write `src/components/Prompt.astro`**
+- [x] **Step 2: Write `src/components/Prompt.astro`**
 
 ```astro
 ---
@@ -466,7 +466,7 @@ const { cmd } = Astro.props;
 </style>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/components/Prompt.astro
@@ -480,7 +480,7 @@ git commit -m "Add Prompt component — the terminal-line primitive"
 **Files:**
 - Create: `src/components/Nav.astro`
 
-- [ ] **Step 1: Write `src/components/Nav.astro`**
+- [x] **Step 1: Write `src/components/Nav.astro`**
 
 ```astro
 ---
@@ -545,7 +545,7 @@ const links = [
 </style>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/components/Nav.astro
@@ -559,13 +559,13 @@ git commit -m "Add Nav component (ls + inline variants)"
 **Files:**
 - Create: `src/layouts/Base.astro`
 
-- [ ] **Step 1: Create the layouts directory**
+- [x] **Step 1: Create the layouts directory**
 
 ```bash
 mkdir -p src/layouts
 ```
 
-- [ ] **Step 2: Write `src/layouts/Base.astro`**
+- [x] **Step 2: Write `src/layouts/Base.astro`**
 
 ```astro
 ---
@@ -604,7 +604,7 @@ const {
 </html>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/layouts/Base.astro
@@ -618,13 +618,13 @@ git commit -m "Add Base layout"
 **Files:**
 - Create: `src/pages/index.astro`
 
-- [ ] **Step 1: Create the pages directory if missing**
+- [x] **Step 1: Create the pages directory if missing**
 
 ```bash
 mkdir -p src/pages
 ```
 
-- [ ] **Step 2: Write `src/pages/index.astro`**
+- [x] **Step 2: Write `src/pages/index.astro`**
 
 ```astro
 ---
@@ -666,7 +666,7 @@ import Prompt from '../components/Prompt.astro';
 </style>
 ```
 
-- [ ] **Step 3: Build and verify the home page renders**
+- [x] **Step 3: Build and verify the home page renders**
 
 ```bash
 npm run build
@@ -675,12 +675,14 @@ test -f dist/index.html && echo "home page built"
 
 Expected: prints `home page built`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add src/pages/index.astro
 git commit -m "Add home page with terminal-style hero"
 ```
+
+> **Note added during execution:** Astro parses `<<X>>` in element body as a JSX fragment. Use `{'<<X>>'}` for placeholders inside JSX body content. Attribute values (e.g., `title="<<X>>"`) are fine bare. verify.sh check 7 was updated to grep for either `<<` or `&lt;&lt;` (the entity form Astro emits).
 
 ---
 
@@ -689,7 +691,7 @@ git commit -m "Add home page with terminal-style hero"
 **Files:**
 - Create: `src/pages/about.astro`
 
-- [ ] **Step 1: Write `src/pages/about.astro`**
+- [x] **Step 1: Write `src/pages/about.astro`**
 
 ```astro
 ---
@@ -716,7 +718,7 @@ import Prompt from '../components/Prompt.astro';
 </Base>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/pages/about.astro
@@ -730,7 +732,7 @@ git commit -m "Add /about page"
 **Files:**
 - Create: `src/content.config.ts`
 
-- [ ] **Step 1: Write `src/content.config.ts`**
+- [x] **Step 1: Write `src/content.config.ts`**
 
 Note for the reader: Astro v5 expects the content config at `src/content.config.ts` (not the v4 location of `src/content/config.ts`). The collection uses a `glob` loader; the v4 `type: 'content'` shorthand is gone.
 
@@ -756,7 +758,7 @@ const projects = defineCollection({
 export const collections = { projects };
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/content.config.ts
@@ -770,13 +772,13 @@ git commit -m "Add projects content collection schema (Zod)"
 **Files:**
 - Create: `src/content/projects/placeholder.md`
 
-- [ ] **Step 1: Create the content directory**
+- [x] **Step 1: Create the content directory**
 
 ```bash
 mkdir -p src/content/projects
 ```
 
-- [ ] **Step 2: Write `src/content/projects/placeholder.md`**
+- [x] **Step 2: Write `src/content/projects/placeholder.md`**
 
 ```markdown
 ---
@@ -808,7 +810,7 @@ cover_alt: "<<ALT_TEXT_DESCRIBING_PROJECT_COVER_IF_ADDED_LATER>>"
 - <<LESSON_3>>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/content/projects/placeholder.md
@@ -822,7 +824,7 @@ git commit -m "Add placeholder project entry"
 **Files:**
 - Create: `src/components/ProjectCard.astro`
 
-- [ ] **Step 1: Write `src/components/ProjectCard.astro`**
+- [x] **Step 1: Write `src/components/ProjectCard.astro`**
 
 ```astro
 ---
@@ -891,7 +893,7 @@ const { title, summary, stack, status } = project.data;
 </style>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/components/ProjectCard.astro
@@ -905,13 +907,13 @@ git commit -m "Add ProjectCard component"
 **Files:**
 - Create: `src/pages/projects/index.astro`
 
-- [ ] **Step 1: Create the projects pages directory**
+- [x] **Step 1: Create the projects pages directory**
 
 ```bash
 mkdir -p src/pages/projects
 ```
 
-- [ ] **Step 2: Write `src/pages/projects/index.astro`**
+- [x] **Step 2: Write `src/pages/projects/index.astro`**
 
 ```astro
 ---
@@ -935,7 +937,7 @@ const projects = await getCollection('projects');
 </Base>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/pages/projects/index.astro
@@ -949,7 +951,7 @@ git commit -m "Add /projects index page"
 **Files:**
 - Create: `src/layouts/Project.astro`
 
-- [ ] **Step 1: Write `src/layouts/Project.astro`**
+- [x] **Step 1: Write `src/layouts/Project.astro`**
 
 ```astro
 ---
@@ -1021,7 +1023,7 @@ const dateFmt = (d?: Date) =>
 </style>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/layouts/Project.astro
@@ -1035,7 +1037,7 @@ git commit -m "Add Project layout"
 **Files:**
 - Create: `src/pages/projects/[slug].astro`
 
-- [ ] **Step 1: Write `src/pages/projects/[slug].astro`**
+- [x] **Step 1: Write `src/pages/projects/[slug].astro`**
 
 Astro v5 uses `getCollection` + `render` for content-collection pages. The slug parameter is `post.id` (the v4 `post.slug` is gone).
 
@@ -1060,7 +1062,7 @@ const { Content } = await render(project);
 </Project>
 ```
 
-- [ ] **Step 2: Build and confirm the placeholder project page is generated**
+- [x] **Step 2: Build and confirm the placeholder project page is generated**
 
 ```bash
 npm run build
@@ -1069,7 +1071,7 @@ test -f dist/projects/placeholder/index.html && echo "project deep-dive built"
 
 Expected: prints `project deep-dive built`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 git add src/pages/projects/[slug].astro
@@ -1083,7 +1085,7 @@ git commit -m "Add dynamic /projects/[slug] page"
 **Files:**
 - Create: `src/components/SkillTag.astro`
 
-- [ ] **Step 1: Write `src/components/SkillTag.astro`**
+- [x] **Step 1: Write `src/components/SkillTag.astro`**
 
 ```astro
 ---
@@ -1106,7 +1108,7 @@ const { name } = Astro.props;
 </style>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/components/SkillTag.astro
@@ -1120,7 +1122,7 @@ git commit -m "Add SkillTag component"
 **Files:**
 - Create: `src/pages/resume.astro`
 
-- [ ] **Step 1: Write `src/pages/resume.astro`**
+- [x] **Step 1: Write `src/pages/resume.astro`**
 
 ```astro
 ---
@@ -1213,7 +1215,7 @@ import SkillTag from '../components/SkillTag.astro';
 </style>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/pages/resume.astro
@@ -1227,7 +1229,7 @@ git commit -m "Add /resume page"
 **Files:**
 - Create: `src/pages/contact.astro`
 
-- [ ] **Step 1: Write `src/pages/contact.astro`**
+- [x] **Step 1: Write `src/pages/contact.astro`**
 
 ```astro
 ---
@@ -1257,7 +1259,7 @@ import Prompt from '../components/Prompt.astro';
 </Base>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/pages/contact.astro
@@ -1271,7 +1273,7 @@ git commit -m "Add /contact page"
 **Files:**
 - Create: `src/pages/404.astro`
 
-- [ ] **Step 1: Write `src/pages/404.astro`**
+- [x] **Step 1: Write `src/pages/404.astro`**
 
 ```astro
 ---
@@ -1289,7 +1291,7 @@ import Prompt from '../components/Prompt.astro';
 </Base>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 git add src/pages/404.astro
@@ -1302,7 +1304,7 @@ git commit -m "Add 404 page"
 
 **Files:** none (validation only)
 
-- [ ] **Step 1: Run verify.sh**
+- [x] **Step 1: Run verify.sh**
 
 ```bash
 cd ~/projects/resume-website
@@ -1314,7 +1316,7 @@ Expected output:
 - Final line: `verify.sh: ALL CHECKS PASSED`
 - Exit code 0
 
-- [ ] **Step 2: If any check fails, fix the specific reported file/issue and re-run.**
+- [x] **Step 2: If any check fails, fix the specific reported file/issue and re-run.**
 
 The script prints exactly what is missing. Common failures and their fixes:
 - `page missing class="prompt"` → the named page is rendered without the `<Prompt>` component; add one.
@@ -1323,14 +1325,14 @@ The script prints exactly what is missing. Common failures and their fixes:
 - `bundled CSS does not reference JetBrains Mono` → the `@import '@fontsource-variable/jetbrains-mono'` line in `global.css` was removed; restore it.
 - `page contains <script> tag` → an Astro view-transitions `<ClientRouter />` import or framework island slipped in; remove it. (No JS in this shell, by design.)
 
-- [ ] **Step 3: Final commit (only if any fix landed in Step 2)**
+- [x] **Step 3: Final commit (only if any fix landed in Step 2)**
 
 ```bash
 git add -u
 git commit -m "Final verify.sh pass — all checks green"
 ```
 
-- [ ] **Step 4: Emit the completion promise**
+- [x] **Step 4: Emit the completion promise**
 
 When `verify.sh` is green and every task above is checked, output the literal string:
 
