@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="<<SITE_TAGLINE>>" />
+    <title>&lt;&lt;PROJECT_TITLE&gt;&gt; — &lt;&lt;YOUR_NAME&gt;&gt;</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .meta {
+        margin: var(--space-2) 0 var(--space-4);
+        font-size: 0.875rem;
+        color: var(--fg-muted);
+      }
+      .stack {
+        margin: 0 0 var(--space-5);
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+      .stack li {
+        font-size: 0.75rem;
+        color: var(--fg-muted);
+        border: 1px solid var(--border);
+        padding: 2px var(--space-2);
+      }
+      article h2 {
+        margin-top: var(--space-5);
+        color: var(--fg);
+      }
+      article p {
+        color: var(--fg);
+      }
+      article li {
+        color: var(--fg);
+      }
+    </style>
+  </head>
+  <body>
+    <main class>
+      <nav class="nav-inline">
+        <a href="../index.html">~</a
+        ><span class="sep"> · </span
+        ><a href="../about.html">about</a
+        ><span class="sep"> · </span
+        ><a href="../resume.html">resume</a
+        ><span class="sep"> · </span
+        ><a href="../projects.html" class="active">projects</a
+        ><span class="sep"> · </span
+        ><a href="../contact.html">contact</a>
+      </nav>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd"
+          >cat ~/projects/placeholder/README.md</span
+        >
+        <div class="output">
+          <h1>&lt;&lt;PROJECT_TITLE&gt;&gt;</h1>
+          <p class="muted">
+            &lt;&lt;ONE_LINE_DESCRIPTION&gt;&gt;
+          </p>
+          <p class="meta">
+            <span class="label">status</span> wip
+            <span class="label">started</span>
+            2026-01-01
+            <span class="label">finished</span> present
+            <span class="label">repo</span>
+            <a
+              href="https://example.com/placeholder-repo"
+              
+              >https://example.com/placeholder-repo</a
+            >
+          </p>
+          <ul class="stack">
+            <li>&lt;&lt;TECH_1&gt;&gt;</li>
+            <li>&lt;&lt;TECH_2&gt;&gt;</li>
+            <li>&lt;&lt;TECH_3&gt;&gt;</li>
+          </ul>
+        </div>
+      </div>
+      <article>
+        <h2 id="what-it-does">What it does</h2>
+        <p>&#x3C;&#x3C;TWO_OR_THREE_PARAGRAPHS_DESCRIBING_THE_PROJECT>></p>
+        <h2 id="why-i-built-it">Why I built it</h2>
+        <p>&#x3C;&#x3C;MOTIVATION_AND_PROBLEM_IT_SOLVES>></p>
+        <h2 id="architecture">Architecture</h2>
+        <p>&#x3C;&#x3C;HIGH_LEVEL_ARCHITECTURE_DIAGRAM_OR_DESCRIPTION>></p>
+        <h2 id="lessons-learned">Lessons learned</h2>
+        <ul>
+          <li>&#x3C;&#x3C;LESSON_1>></li>
+          <li>&#x3C;&#x3C;LESSON_2>></li>
+          <li>&#x3C;&#x3C;LESSON_3>></li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>

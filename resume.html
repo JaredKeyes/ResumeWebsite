@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="<<SITE_TAGLINE>>" />
+  <title>resume — &lt;&lt;YOUR_NAME&gt;&gt;</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .skill {
+      display: inline-block;
+      font-size: 0.875rem;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 2px var(--space-2);
+      margin: 0 var(--space-1) var(--space-1) 0;
+    }
+
+    .section-h {
+      color: var(--accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .entry {
+      margin: 0 0 var(--space-4);
+    }
+
+    .entry-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-2);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    li {
+      margin-bottom: var(--space-1);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="wide">
+    <nav class="nav-inline">
+      <a href="index.html">~</a>
+      <span class="sep"> · </span>
+      <a href="about.html">about</a>
+      <span class="sep"> · </span>
+      <a href="resume.html" class="active">resume</a>
+      <span class="sep"> · </span>
+      <a href="projects.html">projects</a>
+      <span class="sep"> · </span>
+      <a href="contact.html">contact</a>
+    </nav>
+    <div class="prompt">
+      <span class="sigil">$</span>
+      <span class="cmd">cat ~/resume.txt</span>
+      <div class="output">
+        <h1>Jared Keyes</h1>
+        <p class="muted">
+          Machine Learning Engineer · Aberdeen, MD
+          <a href="mailto:Jared.Keyes3@gmail.com">Jared.Keyes3@gmail.com</a>
+          · <a href="https://www.linkedin.com/in/jared-keyes3/">LinkedIn</a>
+        </p>
+        <p>
+          <a href="JaredKeyes.pdf">Download PDF</a>
+        </p>
+      </div>
+    </div>
+    <section>
+      <h2 class="section-h">Experience</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <strong>Support Technician</strong>
+          · Defense Logistic Agency
+          <span class="muted">01/2025 - Present</span>
+        </div>
+        <ul>
+          <li>
+            &lt;&lt;BULLET_1_ACHIEVEMENT_OR_RESPONSIBILITY&gt;&gt;
+          </li>
+          <li>&lt;&lt;BULLET_2&gt;&gt;</li>
+          <li>&lt;&lt;BULLET_3&gt;&gt;</li>
+        </ul>
+      </div>
+      <div class="entry">
+        <div class="entry-head">
+          <strong>Amazon Dedicated Cloud Engineer</strong>
+          · Amazon Web Services
+          <span class="muted">03/2022 - 02/2023</span>
+        </div>
+        <ul>
+          <li>&lt;&lt;BULLET_1&gt;&gt;</li>
+          <li>&lt;&lt;BULLET_2&gt;&gt;</li>
+        </ul>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <section>
+      <h2 class="section-h">Skills</h2>
+      <p>
+        <span class="skill">&lt;&lt;SKILL_1&gt;&gt;</span>
+        <span class="skill">&lt;&lt;SKILL_2&gt;&gt;</span>
+        <span class="skill">&lt;&lt;SKILL_3&gt;&gt;</span>
+        <span class="skill">&lt;&lt;SKILL_4&gt;&gt;</span>
+        <span class="skill">&lt;&lt;SKILL_5&gt;&gt;</span>
+        <span class="skill">&lt;&lt;SKILL_6&gt;&gt;</span>
+      </p>
+    </section>
+    <div class="divider"></div>
+    <section>
+      <h2 class="section-h">Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <strong data-astro-cid-ruvg6z4q>&lt;&lt;DEGREE&gt;&gt;</strong> ·
+          &lt;&lt;INSTITUTION&gt;&gt;
+          <span class="muted">&lt;&lt;EDUCATION_DATE_RANGE&gt;&gt;</span>
+        </div>
+        <p>
+          &lt;&lt;OPTIONAL_NOTE_ON_HONORS_OR_RELEVANT_COURSEWORK&gt;&gt;
+        </p>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="<<SITE_TAGLINE>>" />
+    <title>Jared Keyes</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .caret-line {
+        margin-top: var(--space-5);
+      }
+    </style>
+  </head>
+  <body>
+    <main class>
+      <nav class="nav-ls">
+        <a href="about.html" class="entry">about/</a>
+        <a href="projects.html" class="entry">projects/</a>
+        <a href="resume.html" class="entry">resume.md</a>
+        <a href="contact.html" class="entry">contact.txt</a>
+      </nav>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">whoami</span>
+        <div class="output">
+          JARED KEYES
+        </div>
+      </div>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">cat ~/.bio</span>
+        <div class="output">
+          Machine Learning Engineer <br />
+          &lt;&lt;TWO_LINE_INTRO_PARAGRAPH&gt;&gt;
+          <span class="muted"
+            >Currently: Completing the Cloud Resume Challenge.</span
+          >
+        </div>
+      </div>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">ls ~</span>
+        <div class="output">
+          <a href="about.html">about/</a>
+          <a href="projects.html">projects/</a>
+          <a href="resume.html">resume.md</a>
+          <a href="contact.html">contact.txt</a>
+        </div>
+      </div>
+      <div class="caret-line">
+        <span style="color: var(--prompt)">$</span>
+        <span class="caret"></span>
+      </div>
+    </main>
+  </body>
+</html>

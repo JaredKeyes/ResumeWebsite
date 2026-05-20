@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="<<SITE_TAGLINE>>" />
+    <title>projects — &lt;&lt;YOUR_NAME&gt;&gt;</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <style>
+      .card {
+        display: block;
+        border: 1px solid var(--border);
+        padding: var(--space-4);
+        margin: 0 0 var(--space-4);
+        text-decoration: none;
+        color: var(--fg);
+      }
+      .card:hover {
+        border-color: var(--accent);
+      }
+      .card-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-3);
+        margin-bottom: var(--space-2);
+      }
+      .card h3 {
+        margin: 0;
+        color: var(--fg);
+      }
+      .status {
+        font-size: 0.75rem;
+        color: var(--fg-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .status.shipped {
+        color: var(--accent);
+      }
+      .summary {
+        margin: 0 0 var(--space-3);
+        color: var(--fg-muted);
+      }
+      .stack {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+      .stack li {
+        font-size: 0.75rem;
+        color: var(--fg-muted);
+        border: 1px solid var(--border);
+        padding: 2px var(--space-2);
+      }
+    </style>
+  </head>
+  <body>
+    <main class>
+      <nav class="nav-inline">
+        <a href="index.html">~</a>
+        <span class="sep"> · </span>
+        <a href="about.html">about</a>
+        <span class="sep"> · </span>
+        <a href="resume.html">resume</a>
+        <span class="sep"> · </span>
+        <a href="projects.html" class="active">projects</a>
+        <span class="sep"> · </span>
+        <a href="contact.html">contact</a>
+      </nav>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">ls -la ~/projects</span>
+        <div class="output">
+          <p class="muted">1 project. &lt;&lt;INTRO_TO_PROJECTS_LIST&gt;&gt;</p>
+        </div>
+      </div>
+      <section>
+        <a href="/projects/placeholder" class="card">
+          <div class="card-head">
+            <h3>&lt;&lt;PROJECT_TITLE&gt;&gt;</h3>
+            <span class="status wip">wip</span>
+          </div>
+          <p class="summary">
+            &lt;&lt;ONE_LINE_DESCRIPTION&gt;&gt;
+          </p>
+          <ul class="stack">
+            <li>&lt;&lt;TECH_1&gt;&gt;</li>
+            <li>&lt;&lt;TECH_2&gt;&gt;</li>
+            <li>&lt;&lt;TECH_3&gt;&gt;</li>
+          </ul>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
