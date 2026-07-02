@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, intiial-scale=1" />
+        <meta name="description" content="Security-Copilot - a serverless GenAI SOC copilot on AWS: grounded
+        alert investigations, live guardrailed Q&A, and an LLM-as-judge eval harness, by Jared Keyes" />
+        <title>Security-Copilot - Jared Keyes</title>
+        <link rel="stylesheet" href="../css/style.css" />
+        <style>
+            .meta {
+                margin: var(--space-2) 0 var(--space-4);
+                font-size: 0.875rem;
+                color: var(--fg-muted);
+            }
+            .stack {
+                margin: 0 0 var(--space-5);
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                gap: var(--space-2);
+            }
+            .stack li {
+                font-size: 0.75rem;
+                color: var(--fg-muted);
+                border: 1px solid var(--border);
+                padding: 2px var(--space-2);
+            }
+            .demo-callout {
+                border: 1px solid var(--accent);
+                padding: var(--space-3) var(--space-4);
+                margin: var(--space-4) 0 var(--space-5);
+            }
+            .demo-callout p {
+                margin: 0;
+            }
+            article h2 {
+                margin-top: var(--space-5);
+                color: var(--fg)
+            }
+            article p {
+                color: var(--fg);
+            }
+            article li {
+                color: var(--fg);
+            }
+        </style>
+    </head>
+    <body>
+        <main class>
+      <nav class="nav-inline">
+        <a href="../index.html">~</a
+        ><span class="sep"> · </span
+        ><a href="../about.html">about</a
+        ><span class="sep"> · </span
+        ><a href="../resume.html">resume</a
+        ><span class="sep"> · </span
+        ><a href="../projects.html" class="active">projects</a
+        ><span class="sep"> · </span
+        ><a href="../contact.html">contact</a>
+      </nav>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">cat ~/projects/security-copilot/README.md</span>
+        <div class="output">
+          <h1>Security-Copilot</h1>
+          <p class="muted">
+            A serverless GenAI SOC copilot: grounded alert investigations and live,
+            guardrailed Q&amp;A - kept honest by citation-coverage checks.
+          </p>
+          <p class="meta">
+            <span class="label">status</span> shipped
+            <span class="label">started</span> 2026-06
+            <span class="label">finished</span> 2026-07
+            <span class="label">demo</span>
+            <a href="https://demo.jaredkeyes.site">demo.jaredkeyes.site</a>
+            <span class="label">repo</span>
+            <a
+              href="https://github.com/JaredKeyes/Security-Copilot">github.com/JaredKeyes/Security-Copilot</a>
+          </p>
+          <ul class="stack">
+            <li>Python</li>
+            <li>AWS Lambda</li>
+            <li>Terraform</li>
+            <li>Anthropic Claude</li>
+            <li>CloudFront/S3</li>
+            <li>FastAPI</li>
+            <li>ChromaDB</li>
+            <li>DynameDB</li>
+          </ul>
+        </div>
+      </div>
+      <div class="demo-callout">
+        <p>
+            <strong>Live demo:</strong>
+            <a href="https://demo.jaredkeyes.site">demo.jaredkeyes.site</a>
+            - browse precomputed investigation reports and ask grounded questions about any
+            alert. The first question warms the model (~15-20s); the whole stack scales to
+            zero when idle.
+        </p>
+      </div>
+      <article>
+        <h2 id="what-it-does">What it does</h2>
+        <p>
+            Security-Copilot turns raw cloud security alerts into analyst-ready
+            investigations. It ships a set of precomputed, grounded investigation reports
+            for GuardDuty-style findings, plus a live chat that answers analyst questions
+            about any single alert - strictly from that alert's evidence and the relevant
+            runbook excerpts. Browsing the reports is free (served straight from S3); only 
+            the live Q&amp;A calls a model. 
+        </p>
+        <h2 id="why-i-built-it">Why I built it</h2>
+        <p>
+            Real SOC triage is slow and repetitive, and most "AI SOC" demos quietly
+            hallucinate. I wanted something genuinely useful and genuinely honest: real
+            retrieval over real evidence, a real LLM at the generation step, and a guardrail
+            layer that refuses to let the model invent IPs, accounts, or finding IDs. It
+            doubles as an end-to-end demonstraion of production GenAI on AWS - retrieval,
+            serving, cost control, evaluation, and infrastructure-as-code.
+        </p>
+        <h2 id="architecture">Architecture</h2>
+        <p>
+            The whole system scales to zero. Precomputed reports live in S3 and are browsed
+            for $0. Live questions hit a container-image AWS Lambda (FastAPI + Mangum) behind
+            an HTTP API Gateway; retrieval uses fastembed + ChromaDB, and Claude Haiku
+            generates the answr. A static simgle-page app - vanilla JS, no build step - is 
+            served from a private S3 bucket through CloudFront (Origin Access Control, HTTPS,
+            custom domain). A DynamoDb-backed daily token budget acts as a kill-switch.
+            Everything is defined in Terraform.
+        </p>
+        <h2 id="kept-honest">How it's kept honest</h2>
+        <p>
+            Every served report and every live answer passes a deterministic
+            citation-coverage guardrail: each IP, finding ID, and service account named in
+            the text must appear in the underlying evidence, or the output is flagged
+            <code>REVIEW_REQUIRED</code>. A groundedness score reports the fraction of named
+            entities backed by evidence. Offline, a cluade Sonnet LLM-as-judge scores
+            faithfulness and correctness, and a meta-evaluation checks the judge against
+            ground truth. The demo surfaces all of this in a "how this is kept honest"
+            panel - including a regression where an injected fake IP visibly trips the guardrail.
+        </p>
+        <h2 id="lessons-learned">Lessons learned</h2>
+        <ul>
+          <li>
+            Cold starts are a design constraint: swapping sentence-transformers/torch for
+            fastembed (ONNX) was the difference between blowing and meeting Lambda's 30s
+            cap.
+          </li>
+          <li>
+            CORS is subtle behind API Gateway: a single <code>$default</code> route
+            suppresses the automatic OPTIONS-preflight handling, so the browser preflight
+            has to be handled explicitly.
+          </li>
+          <li>
+            Scale-to-zero is a feature, not just a cost lever: precomputing the expensive
+            work into S3 keeps the common path free and the demo effectively free to host.
+          </li>
+          <li>
+            Owning the whole stack - retrieval, serving, evals, and Terraform - allows
+            for greater visibility.
+          </li>
+        </ul>
+        </main>
+    </body>
+</html>
