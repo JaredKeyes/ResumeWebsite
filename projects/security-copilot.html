@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, intiial-scale=1" />
+        <meta name="viewport" content="width=device-width, intial-scale=1" />
         <meta name="description" content="Security-Copilot - a serverless GenAI SOC copilot on AWS: grounded
         alert investigations, live guardrailed Q&A, and an LLM-as-judge eval harness, by Jared Keyes" />
         <title>Security-Copilot - Jared Keyes</title>
@@ -87,7 +87,7 @@
             <li>CloudFront/S3</li>
             <li>FastAPI</li>
             <li>ChromaDB</li>
-            <li>DynameDB</li>
+            <li>DynamoDB</li>
           </ul>
         </div>
       </div>
@@ -116,7 +116,7 @@
             hallucinate. I wanted something genuinely useful and genuinely honest: real
             retrieval over real evidence, a real LLM at the generation step, and a guardrail
             layer that refuses to let the model invent IPs, accounts, or finding IDs. It
-            doubles as an end-to-end demonstraion of production GenAI on AWS - retrieval,
+            doubles as an end-to-end demonstration of production GenAI on AWS - retrieval,
             serving, cost control, evaluation, and infrastructure-as-code.
         </p>
         <h2 id="architecture">Architecture</h2>
@@ -124,9 +124,9 @@
             The whole system scales to zero. Precomputed reports live in S3 and are browsed
             for $0. Live questions hit a container-image AWS Lambda (FastAPI + Mangum) behind
             an HTTP API Gateway; retrieval uses fastembed + ChromaDB, and Claude Haiku
-            generates the answr. A static simgle-page app - vanilla JS, no build step - is 
+            generates the answer. A static single-page app - vanilla JS, no build step - is 
             served from a private S3 bucket through CloudFront (Origin Access Control, HTTPS,
-            custom domain). A DynamoDb-backed daily token budget acts as a kill-switch.
+            custom domain). A DynamoDB-backed daily token budget acts as a kill-switch.
             Everything is defined in Terraform.
         </p>
         <h2 id="kept-honest">How it's kept honest</h2>
@@ -135,7 +135,7 @@
             citation-coverage guardrail: each IP, finding ID, and service account named in
             the text must appear in the underlying evidence, or the output is flagged
             <code>REVIEW_REQUIRED</code>. A groundedness score reports the fraction of named
-            entities backed by evidence. Offline, a cluade Sonnet LLM-as-judge scores
+            entities backed by evidence. Offline, a claude Sonnet LLM-as-judge scores
             faithfulness and correctness, and a meta-evaluation checks the judge against
             ground truth. The demo surfaces all of this in a "how this is kept honest"
             panel - including a regression where an injected fake IP visibly trips the guardrail.
@@ -161,6 +161,7 @@
             for greater visibility.
           </li>
         </ul>
+        </article>
         </main>
     </body>
 </html>
