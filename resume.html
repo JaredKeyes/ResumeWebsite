@@ -32,8 +32,19 @@
       justify-content: space-between;
       align-items: baseline;
       gap: var(--space-3);
-      flex-wrap: wrap;
       margin-bottom: var(--space-2);
+    }
+
+    .entry-head .muted {
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 640px) {
+      .entry-head {
+        flex-direction: column;
+        gap: var(--space-1);
+      }
     }
 
     ul {
@@ -79,8 +90,7 @@
       <h2 class="section-h">Experience</h2>
       <div class="entry">
         <div class="entry-head">
-          <strong>Infrastructure Application Support Specialist</strong>
-          · Defense Logistics Agency
+          <span><strong>Infrastructure Support Specialist</strong> · Defense Logistics Agency</span>
           <span class="muted">01/2025 - Present</span>
         </div>
         <ul>
@@ -99,8 +109,7 @@
       </div>
       <div class="entry">
         <div class="entry-head">
-          <strong>Amazon Dedicated Cloud Engineer</strong>
-          · Amazon Web Services
+          <span><strong>Amazon Dedicated Cloud Engineer</strong> · Amazon Web Services</span>
           <span class="muted">03/2022 - 02/2023</span>
         </div>
         <ul>
@@ -118,8 +127,7 @@
       </div>
       <div class="entry">
         <div class="entry-head">
-          <strong>Cyber Analyst</strong>
-          · CyberPoint International(NBIS)
+          <span><strong>Cyber Analyst</strong> · CyberPoint International(NBIS)</span>
           <span class="muted">09/2021 - 05/2023</span>
         </div>
         <ul>
@@ -136,8 +144,7 @@
       </div>
       <div class="entry">
         <div class="entry-head">
-          <strong>Network Engineer / ISSO</strong>
-          · Thales Trusted Cyber Technologies
+          <span><strong>Network Engineer / ISSO</strong> · Thales Trusted Cyber Technologies</span>
           <span class="muted">02/2019 - 09/2021</span>
         </div>
         <ul>
@@ -170,13 +177,11 @@
       <h2 class="section-h">Education</h2>
       <div class="entry">
         <div class="entry-head">
-          <strong>Master of Science, Artificial Intelligence</strong> ·
-          University of Colorado - Boulder
+          <span><strong>Master of Science, Artificial Intelligence</strong> · University of Colorado - Boulder</span>
           <span class="muted">2026 - Present</span>
         </div>
         <div class="entry-head">
-          <strong>Bachelor of Science, Cybersecurity</strong> ·
-          Purdue Global University
+          <span><strong>Bachelor of Science, Cybersecurity</strong> · Purdue Global University</span>
           <span class="muted">2023 - 2026</span>
         </div>
       </div>
