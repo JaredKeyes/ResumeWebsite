@@ -35,7 +35,8 @@
         text-transform: uppercase;
         letter-spacing: 1px;
       }
-      .status.shipped {
+      .status.shipped,
+      .status.running {
         color: var(--accent);
       }
       .summary {
@@ -75,9 +76,28 @@
         <span class="sigil">$</span>
         <span class="cmd">ls -la ~/projects</span>
         <div class="output">
-          <p class="muted">1 project.</p>
+          <p class="muted">2 projects.</p>
         </div>
       </div>
+      <section>
+        <a href="projects/homelab.html" class="card">
+          <div class="card-head">
+            <h3>Homelab</h3>
+            <span class="status running">running</span>
+          </div>
+          <p class="summary">
+            A hybrid homelab: a 3-node, mixed-architecture Kubernetes cluster (x86 mini PC + two Raspberry Pi 5s) run with GitOps and connected to AWS. It hosts my self-hosted apps, local LLMs, and ML projects.
+          </p>
+          <ul class="stack">
+            <li>Kubernetes</li>
+            <li>Argo CD</li>
+            <li>Cilium</li>
+            <li>Prometheus/Grafana</li>
+            <li>Raspberry Pi</li>
+            <li>AWS</li>
+          </ul>
+        </a>
+      </section>
       <section>
         <a href="projects/security-copilot.html" class="card">
           <div class="card-head">

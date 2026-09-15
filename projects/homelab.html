@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Homelab - a hybrid, mixed-architecture Kubernetes cluster (x86 mini PC + Raspberry Pi 5s)
+    run with GitOps and connected to AWS, by Jared Keyes" />
+    <title>Homelab - Jared Keyes</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .meta {
+        margin: var(--space-2) 0 var(--space-4);
+        font-size: 0.875rem;
+        color: var(--fg-muted);
+      }
+      .stack {
+        margin: 0 0 var(--space-5);
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+      .stack li {
+        font-size: 0.75rem;
+        color: var(--fg-muted);
+        border: 1px solid var(--border);
+        padding: 2px var(--space-2);
+      }
+      article h2 {
+        margin-top: var(--space-5);
+        color: var(--fg);
+      }
+      article h3 {
+        margin: var(--space-4) 0 var(--space-2);
+        color: var(--accent);
+      }
+      article p {
+        color: var(--fg);
+      }
+      article li {
+        color: var(--fg);
+      }
+      .scroll-x {
+        overflow-x: auto;
+        margin: var(--space-3) 0 var(--space-4);
+      }
+      .hardware {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+      .hardware th,
+      .hardware td {
+        text-align: left;
+        vertical-align: top;
+        padding: var(--space-2) var(--space-3) var(--space-2) 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .hardware th {
+        font-weight: 400;
+        color: var(--fg-muted);
+      }
+      .hardware td:first-child {
+        white-space: nowrap;
+      }
+      @media (max-width: 640px) {
+        .hardware thead {
+          display: none;
+        }
+        .hardware tr,
+        .hardware td {
+          display: block;
+        }
+        .hardware tr {
+          padding: var(--space-2) 0;
+          border-bottom: 1px solid var(--border);
+        }
+        .hardware td {
+          padding: 0;
+          border: 0;
+        }
+        .hardware td:first-child {
+          color: var(--accent);
+        }
+      }
+      .diagram-wrap {
+        border: 1px solid var(--border);
+        background: var(--bg);
+      }
+      .diagram {
+        margin: 0;
+        padding: var(--space-3);
+        width: max-content;
+        color: var(--fg);
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        line-height: 1.4;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav class="nav-inline">
+        <a href="../index.html">~</a
+        ><span class="sep"> · </span
+        ><a href="../about.html">about</a
+        ><span class="sep"> · </span
+        ><a href="../resume.html">resume</a
+        ><span class="sep"> · </span
+        ><a href="../projects.html" class="active">projects</a
+        ><span class="sep"> · </span
+        ><a href="../contact.html">contact</a>
+      </nav>
+      <div class="prompt">
+        <span class="sigil">$</span>
+        <span class="cmd">cat ~/projects/homelab/README.md</span>
+        <div class="output">
+          <h1>Homelab</h1>
+          <p class="muted">
+            A hybrid homelab: a three-node, mixed-architecture Kubernetes cluster run with
+            GitOps and connected to AWS.
+          </p>
+          <p class="meta">
+            <span class="label">status</span> running
+            <span class="label">started</span> 2026-01
+          </p>
+          <ul class="stack">
+            <li>Kubernetes</li>
+            <li>Argo CD</li>
+            <li>Cilium</li>
+            <li>MetalLB</li>
+            <li>ingress-nginx</li>
+            <li>cert-manager</li>
+            <li>Helm</li>
+            <li>Woodpecker CI</li>
+            <li>Prometheus/Grafana</li>
+            <li>Ollama</li>
+            <li>MLflow</li>
+            <li>Raspberry Pi</li>
+            <li>Synology NFS</li>
+            <li>AWS</li>
+          </ul>
+        </div>
+      </div>
+      <article>
+        <h2 id="what-it-does">What it does</h2>
+        <p>
+            My homelab is a three-node Kubernetes cluster that runs everything I self-host -
+            media, ebooks, passwords, and automations - alongside local LLMs and the on-prem
+            half of Security-Copilot. It mixes architectures: an x86 mini PC as the control
+            plane and two arm64 Raspberry Pi 5s as workers, for 16 cores and 96 GB of RAM,
+            with persistent storage on a Synology NAS over NFS.
+        </p>
+        <p>
+            It is managed with GitOps - every app is a manifest in Git, and Argo CD keeps the
+            cluster in sync with it. It is also hybrid: workloads here share a container
+            image, a cost budget, and data with AWS, over connections that always start from
+            inside the lab.
+        </p>
+        <h2 id="why-i-built-it">Why I built it</h2>
+        <ul>
+          <li>
+            <strong>Hands-on Kubernetes.</strong> Courses and certifications only go so far.
+            I wanted Kubernetes on real hardware, where storage, networking, upgrades, and
+            mixed architectures are problems I actually have to solve.
+          </li>
+          <li>
+            <strong>Owning my own stuff.</strong> I would rather self-host my media, ebooks,
+            passwords, and automations than rent them from SaaS providers.
+          </li>
+          <li>
+            <strong>A home for my ML projects.</strong> An always-on place to run local LLMs,
+            experiment tracking, and my own projects without a cloud bill.
+          </li>
+        </ul>
+        <h2 id="hardware">Hardware</h2>
+        <div class="scroll-x">
+          <table class="hardware">
+            <thead>
+              <tr><th>Node</th><th>Hardware</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>webhost1</td>
+                <td>ASUS PN50 mini PC - Ryzen 7 4700U (8 cores), 64 GB RAM, NVMe + 2 TB SSD</td>
+                <td>Control plane (x86); also runs the heaviest apps</td>
+              </tr>
+              <tr>
+                <td>webhost5</td>
+                <td>Raspberry Pi 5 - 16 GB RAM, PoE, NVMe</td>
+                <td>Worker (arm64)</td>
+              </tr>
+              <tr>
+                <td>webhost6</td>
+                <td>Raspberry Pi 5 - 16 GB RAM, PoE, NVMe</td>
+                <td>Worker (arm64)</td>
+              </tr>
+              <tr>
+                <td>Synology DS124</td>
+                <td>Single-bay NAS</td>
+                <td>NFS storage, backups, private container registry</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h2 id="architecture">Architecture</h2>
+        <p>
+            Git is the source of truth. Argo CD syncs every app into the cluster from a single
+            root application, and Woodpecker CI builds images and pushes them to a private
+            registry on the NAS, tagged with the commit they were built from. Cilium handles
+            pod networking, MetalLB hands out LAN addresses for load-balanced services, and
+            ingress-nginx routes each app's hostname to the right service. Stateful apps get
+            volumes from the NAS through an NFS provisioner, with local-path volumes for
+            node-local data.
+        </p>
+        <div class="scroll-x diagram-wrap">
+<pre class="diagram" role="img" aria-label="Architecture diagram: a Git repo is synced into the cluster by Argo CD, and Woodpecker CI pushes images to a registry on the NAS that the cluster pulls from. The Kubernetes cluster (kubeadm and Cilium) has an x86 control plane, webhost1, and two arm64 workers, webhost5 and webhost6. LAN traffic flows through MetalLB and ingress-nginx to the apps. The cluster mounts NFS storage from a Synology DS124 and makes outbound-only connections to AWS for ECR images, a DynamoDB token budget, and S3 drift data.">  Git repo --> Argo CD                      Woodpecker CI --> registry
+                  | syncs every app                        (on the NAS)
+                  |                                              | images
++-----------------v----- Kubernetes cluster: kubeadm + Cilium ---v-------+
+|                                                                        |
+|   webhost1                 webhost5                webhost6            |
+|   x86 control plane        arm64 worker            arm64 worker        |
+|                                                                        |
+|   LAN --> MetalLB --> ingress-nginx --> *.jaredkeyes.site (LAN only)   |
+|                                                                        |
++-------------+-------------------------------------------+--------------+
+              | NFS                                       | outbound only
+              v                                           v
+       Synology DS124                             AWS (Security-Copilot)
+       app volumes, media,                        ECR        shared image
+       backups, registry                          DynamoDB   token budget
+                                                  S3         drift data</pre>
+        </div>
+        <h2 id="hybrid-cloud">Hybrid cloud</h2>
+        <p>
+            Security-Copilot runs in two places at once: as a scale-to-zero AWS Lambda and as a
+            deployment on this cluster. The lab connects to AWS only where it has a reason to:
+        </p>
+        <ul>
+          <li>
+            <strong>One image, two platforms.</strong> The cluster pulls the exact image
+            digest from ECR that the Lambda runs - one build, two runtimes.
+          </li>
+          <li>
+            <strong>Shared cost cap.</strong> Cloud and on-prem requests draw down the same
+            DynamoDB daily token budget, so one kill-switch covers both.
+          </li>
+          <li>
+            <strong>Scoped cloud access.</strong> The cluster authenticates as a dedicated
+            least-privilege IAM user. Its access key was created outside Terraform, so it
+            never lands in state, and it lives in my self-hosted Vaultwarden.
+          </li>
+          <li>
+            <strong>Cloud data, on-prem compute.</strong> A daily drift-detection job on the
+            cluster reads the report data served from S3 and publishes its results back for
+            the public demo.
+          </li>
+          <li>
+            <strong>Outbound only.</strong> Every AWS integration starts from inside the lab;
+            nothing in the cloud connects in.
+          </li>
+        </ul>
+        <p>
+            The cloud side is covered in detail on the
+            <a href="security-copilot.html">Security-Copilot</a> page.
+        </p>
+        <h2 id="what-runs-on-it">What runs on it</h2>
+        <h3>Platform</h3>
+        <ul>
+          <li>Kubernetes (kubeadm) with Cilium networking</li>
+          <li>MetalLB and ingress-nginx for LAN load balancing and routing</li>
+          <li>Argo CD app-of-apps managing 14 applications from Git</li>
+          <li>Woodpecker CI building images into a private registry on the NAS</li>
+          <li>NFS (default) and local-path storage provisioners</li>
+          <li>Prometheus, Grafana, and Alertmanager, with node metrics from every node</li>
+        </ul>
+        <h3>Machine learning</h3>
+        <ul>
+          <li>Ollama for running LLMs locally</li>
+          <li>
+            MLflow tracking server for Security-Copilot, fed by a scheduled job that imports
+            CI evaluation runs from GitHub Actions
+          </li>
+          <li>
+            Security-Copilot API - autoscales from 1 to 3 replicas on CPU, plus a daily
+            drift-detection job
+          </li>
+        </ul>
+        <h3>Security</h3>
+        <ul>
+          <li>cert-manager with a private homelab CA and Let's Encrypt via <span class="nowrap">DNS-01</span></li>
+          <li>Vaultwarden, a self-hosted Bitwarden-compatible password manager</li>
+          <li>App hostnames that resolve to a private LAN address, not a public one</li>
+          <li>Nightly backup jobs for Vaultwarden and n8n's Postgres database to the NAS</li>
+          <li>A scoped IAM user and outbound-only connections for the AWS side</li>
+          <li>Declarative config in Git, so every change is versioned and reversible</li>
+        </ul>
+        <h3>Self-hosted apps</h3>
+        <ul>
+          <li>Jellyfin media server</li>
+          <li>Calibre-Web Automated, serving an ebook library stored on the NAS</li>
+          <li>n8n workflow automation, backed by Postgres</li>
+        </ul>
+        <h2 id="lessons-learned">Lessons learned</h2>
+        <ul>
+          <li>
+            NFS permissions need a plan up front: containers run as UID 1000, but Synology
+            users start around 1026, so moving my Calibre library onto the NAS meant sorting
+            out ownership before anything could write to it.
+          </li>
+          <li>
+            Mixed architectures shape scheduling: every image has to be multi-arch or pinned
+            to a node, and the heaviest workloads (Ollama, Jellyfin) are pinned to the x86
+            control plane with a toleration for its taint.
+          </li>
+          <li>
+            Keep example files out of applied directories: <code>kubectl apply -f</code> on a
+            folder also applied a <code>secret.example.yaml</code> and overwrote a real Secret
+            with placeholder values.
+          </li>
+          <li>
+            Hybrid means expiring credentials: ECR pull tokens only last 12 hours, so an image
+            update on the cluster can fail with <code>ImagePullBackOff</code> long after the
+            last successful deploy.
+          </li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>
